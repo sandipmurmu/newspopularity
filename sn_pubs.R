@@ -1,4 +1,10 @@
-## 
+## Required Libraries
+library(caret)
+library(flexclust)
+library(randomForest)
+library(miscTools)
+
+
 mashpubs=read.csv(file.choose(),header = TRUE)
 pubs = mashpubs
 
@@ -11,4 +17,9 @@ pubs$data_channel_is_socmed=NULL
 pubs$data_channel_is_lifestyle=NULL
 pubs$data_channel_is_entertainment=NULL
 pubs$shares=NULL
+
+preproc = preProcess(pubs)
+normdata = predict(preproc,pubs)
+
+km = kmeans(normdata,centers = 3)
 

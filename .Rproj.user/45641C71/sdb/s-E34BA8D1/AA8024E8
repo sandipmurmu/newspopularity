@@ -1,0 +1,18 @@
+{
+    "contents" : "## Required Libraries\nlibrary(caret)\nlibrary(flexclust)\nlibrary(randomForest)\nlibrary(miscTools)\n\n\nmashpubs=read.csv(file.choose(),header = TRUE)\npubs = mashpubs\n\npubs$url=NULL\npubs$timedelta=NULL\npubs$data_channel_is_bus=NULL\npubs$data_channel_is_tech=NULL\npubs$data_channel_is_world=NULL\npubs$data_channel_is_socmed=NULL\npubs$data_channel_is_lifestyle=NULL\npubs$data_channel_is_entertainment=NULL\npubs$shares=NULL\n\npreproc = preProcess(pubs)\nnormdata = predict(preproc,pubs)\n\nkm = kmeans(normdata,centers = 3)\n\n",
+    "created" : 1437931309322.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2342563815",
+    "id" : "AA8024E8",
+    "lastKnownWriteTime" : 1437935976,
+    "path" : "C:/babi/projects/newspopularity/sn_pubs.R",
+    "project_path" : "sn_pubs.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
