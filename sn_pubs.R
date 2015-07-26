@@ -22,4 +22,20 @@ preproc = preProcess(pubs)
 normdata = predict(preproc,pubs)
 
 km = kmeans(normdata,centers = 3)
+km.kcca = as.kcca(km,normdata)
+clusterdata = predict(km.kcca)
+
+table(clusterdata)
+
+cluster1 = subset(mashpubs,clusterdata==1)
+cluster2 = subset(mashpubs,clusterdata==2)
+cluster3 = subset(mashpubs,clusterdata==3)
+
+modelRef1 = randomForest(log(shares) ~ . - url, data = cluster1, ntree=10000, importance=TRUE, keep.forest=TRUE, do.trace=1000)
+modelRef2 = randomForest(log(shares) ~ . - url, data = cluster2, ntree=10000, importance=TRUE, keep.forest=TRUE, do.trace=1000)
+modelRef3 = randomForest(log(shares) ~ . - url, data = cluster3, ntree=10000, importance=TRUE, keep.forest=TRUE, do.trace=1000)
+
+
+
+
 
