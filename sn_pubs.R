@@ -112,7 +112,7 @@ allIds = c(test1$url, test2$url, test3$url)
 out_df = data.frame(allIds, preds_test)
 out_df = out_df[with(out_df, order(allIds, preds_test)), ]
 names(out_df) = c("id", "predictions")
-write.csv(out_df, "KM_RF_R_AKumar.csv", row.names=F, quote=F)
+write.csv(out_df, "SandipMurmu.csv", row.names=F, quote=F)
 
 
 
