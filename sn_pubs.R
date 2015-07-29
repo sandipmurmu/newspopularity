@@ -112,12 +112,12 @@ pred_test3 = predict(modelRef3, test3)
 
 ## Combine results from individual sets after exponentiating the predictions
 pred_test = c(exp(pred_test1), exp(pred_test2), exp(pred_test3))
-allIds = c(test1$url, test2$url, test3$url)
+allurls = c(test1$url, test2$url, test3$url)
 
 ## Sort as per id and generate the file for submission
-out_df = data.frame(allIds, preds_test)
-out_df = out_df[with(out_df, order(allIds, preds_test)), ]
-names(out_df) = c("id", "predictions")
+out_df = data.frame(allurls, preds_test)
+out_df = out_df[with(out_df, order(allurls, pred_test)), ]
+names(out_df) = c("url", "predictions")
 write.csv(out_df, "SandipMurmu.csv", row.names=F, quote=F)
 
 
