@@ -1,3 +1,9 @@
+##install.packages("caret")
+##install.packages("flexclust")
+##install.packages("randomForest")
+##install.packages("miscTools")
+
+
 ## Required Libraries
 library(caret)
 library(flexclust)
