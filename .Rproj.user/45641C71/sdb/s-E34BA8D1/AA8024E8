@@ -1,12 +1,12 @@
 {
-    "contents" : "## Required Libraries\nlibrary(caret)\nlibrary(flexclust)\nlibrary(randomForest)\nlibrary(miscTools)\n\n\nmashpubs=read.csv(file.choose(),header = TRUE)\npubs = mashpubs\n\npubs$url=NULL\npubs$timedelta=NULL\npubs$data_channel_is_bus=NULL\npubs$data_channel_is_tech=NULL\npubs$data_channel_is_world=NULL\npubs$data_channel_is_socmed=NULL\npubs$data_channel_is_lifestyle=NULL\npubs$data_channel_is_entertainment=NULL\npubs$shares=NULL\n\npreproc = preProcess(pubs)\nnormdata = predict(preproc,pubs)\n\nkm = kmeans(normdata,centers = 3)\n\n",
+    "contents" : "## Required Libraries\nlibrary(caret)\nlibrary(flexclust)\nlibrary(randomForest)\nlibrary(miscTools)\n\n\nmashpubs=read.csv(file.choose(),header = TRUE)\npubs = mashpubs\n\npubs$url=NULL\npubs$timedelta=NULL\npubs$data_channel_is_bus=NULL\npubs$data_channel_is_tech=NULL\npubs$data_channel_is_world=NULL\npubs$data_channel_is_socmed=NULL\npubs$data_channel_is_lifestyle=NULL\npubs$data_channel_is_entertainment=NULL\npubs$shares=NULL\n\npreproc = preProcess(pubs)\nnormdata = predict(preproc,pubs)\n\nkm = kmeans(normdata,centers = 3)\nkm.kcca = as.kcca(km,normdata)\nclusterdata = predict(km.kcca)\n\ntable(clusterdata)\n\ncluster1 = subset(mashpubs,clusterdata==1)\ncluster2 = subset(mashpubs,clusterdata==2)\ncluster3 = subset(mashpubs,clusterdata==3)\n\nmodelRef1 = randomForest(log(shares) ~ . - url, data = cluster1, ntree=10000, importance=TRUE, keep.forest=TRUE, do.trace=1000)\nmodelRef2 = randomForest(log(shares) ~ . - url, data = cluster2, ntree=10000, importance=TRUE, keep.forest=TRUE, do.trace=1000)\nmodelRef3 = randomForest(log(shares) ~ . - url, data = cluster3, ntree=10000, importance=TRUE, keep.forest=TRUE, do.trace=1000)\n\n\n\n\n\n",
     "created" : 1437931309322.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2342563815",
+    "hash" : "2852010320",
     "id" : "AA8024E8",
-    "lastKnownWriteTime" : 1437935976,
+    "lastKnownWriteTime" : 1438052033,
     "path" : "C:/babi/projects/newspopularity/sn_pubs.R",
     "project_path" : "sn_pubs.R",
     "properties" : {
