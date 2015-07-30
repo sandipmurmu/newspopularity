@@ -87,9 +87,9 @@ test1 = subset(test, ctest == 1)
 test2 = subset(test, ctest == 2)
 test3 = subset(test, ctest == 3)
 
-modelRef1 = randomForest(log(shares) ~ . - url, data = train1, ntree=10000, importance=TRUE, keep.forest=TRUE, do.trace=1000)
-modelRef2 = randomForest(log(shares) ~ . - url, data = train2, ntree=10000, importance=TRUE, keep.forest=TRUE, do.trace=1000)
-modelRef3 = randomForest(log(shares) ~ . - url, data = train3, ntree=10000, importance=TRUE, keep.forest=TRUE, do.trace=1000)
+modelRef1 = randomForest(log(shares) ~ . - url, data = train1, ntree=1000, importance=TRUE, keep.forest=TRUE, do.trace=1000)
+modelRef2 = randomForest(log(shares) ~ . - url, data = train2, ntree=1000, importance=TRUE, keep.forest=TRUE, do.trace=1000)
+modelRef3 = randomForest(log(shares) ~ . - url, data = train3, ntree=1000, importance=TRUE, keep.forest=TRUE, do.trace=1000)
 
 ## Test the prediction on train set
 pred_train1 = predict(modelRef1, train1)
@@ -115,10 +115,10 @@ pred_test = c(exp(pred_test1), exp(pred_test2), exp(pred_test3))
 allurls = c(test1$url, test2$url, test3$url)
 
 ## Sort as per id and generate the file for submission
-out_df = data.frame(allurls, preds_test)
+out_df = data.frame(allurls, pred_test)
 out_df = out_df[with(out_df, order(allurls, pred_test)), ]
 names(out_df) = c("url", "predictions")
-write.csv(out_df, "SandipMurmu.csv", row.names=F, quote=F)
+write.csv(out_df, "C:\babi\SandipMurmu.csv", row.names=F, quote=F)
 
 
 
